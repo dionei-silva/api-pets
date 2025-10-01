@@ -29,6 +29,33 @@ app.get('/pets', (req, res) => {
     })
   }
 })
+// POST
+app.post('/pets', (req, res) =>{
+  try {
+    const body = req.body
+
+    const newPet = {
+        id: randomUUID(),
+        nome: body.nome,
+        raca: body.raca,
+        idade: body.idade,
+        nomeTutor: body.nomeTutor
+    }
+
+    pets.push(newPet)
+
+    res.status(200).send({
+      ok:true,
+      message: "Pet cadastrado com sucesso",
+      dados: pets
+    })
+  } catch (error) {
+    res.status(500).send({
+      ok:false,
+      message: error.toString()
+    })
+  }
+})
 
 
 
