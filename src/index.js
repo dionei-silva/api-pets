@@ -1,7 +1,7 @@
 import express from 'express'
 import * as dotenv from 'dotenv'
 import {randomUUID} from 'crypto'
-import {logMiddleware, validateIdPetMiddleware } from './middleware.js'
+import {logMiddleware, checkPetIdMiddleware } from './middleware.js'
 
 import {pets} from './pets.js'
 
@@ -59,7 +59,7 @@ app.post('/pets', (req, res) =>{
 })
 
 // GETid
-app.get('/pets/:id',[validateIdPetMiddleware], (req, res) => {    
+app.get('/pets/:id',[checkPetIdMiddleware], (req, res) => {    
     res.status(200).send({
       ok:true,
       message: "Pet encontrado com sucesso",

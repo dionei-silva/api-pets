@@ -5,7 +5,7 @@ export const logMiddleware = (req, res, next) => {
       next()
 }
 
-export const validateIdPetMiddleware = (req, res, next) => {
+export const checkPetIdMiddleware = (req, res, next) => {
       try {
       const {id} = req.params
   
