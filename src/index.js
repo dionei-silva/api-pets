@@ -1,7 +1,7 @@
 import express from 'express'
 import * as dotenv from 'dotenv'
 import {randomUUID} from 'crypto'
-import { logMiddleware } from './middleware.js'
+import {logMiddleware, validateIdPetMiddleware } from './middleware.js'
 
 import {pets} from './pets.js'
 
@@ -29,6 +29,7 @@ app.get('/pets', (req, res) => {
     })
   }
 })
+
 // POST
 app.post('/pets', (req, res) =>{
   try {
@@ -56,6 +57,15 @@ app.post('/pets', (req, res) =>{
     })
   }
 })
+
+// GETid
+app.get('/pets/:id',[validateIdPetMiddleware], (req, res) => {    
+    res.status(200).send({
+      ok:true,
+      message: "Pet encontrado com sucesso",
+      dados: req.pet
+    })
+  })
 
 
 
