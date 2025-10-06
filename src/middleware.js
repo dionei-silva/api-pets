@@ -5,27 +5,6 @@ export const logMiddleware = (req, res, next) => {
       next()
 }
 
-export const checkPetIdMiddleware = (req, res, next) => {
-      try {
-      const {id} = req.params
-  
-    const pet = pets.find((item)=> item.id === id)   
-    if(!pet){
-      return res.status(404).send({
-        ok:false,
-        message: "Pet nao encontrado"
-      })
-    } 
-      req.pet = pet
-      next()
-      } catch (error) {
-            return res.status(500).send({
-                  ok:false,
-                  mensage: error.toString()
-            })
-      }
-}
-
 export const validatePetMiddleware = (req, res, next) => {
       try {
             const {nome, idade, raca, nomeTutor} = req.body
