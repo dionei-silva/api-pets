@@ -31,7 +31,7 @@ app.get('/pets', (req, res) => {
 })
 
 // POST
-app.post('/pets', (req, res) =>{
+app.post('/pets',[validatePetMiddleware], (req, res) =>{
   try {
     const body = req.body
 
@@ -59,13 +59,29 @@ app.post('/pets', (req, res) =>{
 })
 
 // GETid
-app.get('/pets/:id',[checkPetIdMiddleware], (req, res) => {    
+app.get('/pets/:id', (req, res) => { 
+  try {
+    const {id} = req.params
+
+  const pet = pets.find((item)=> item.id === id)   
+  if(!pet){
+    return res.status(404).send({
+      ok:false,
+      message: "Pet nao encontrado"
+    })
+  } 
     res.status(200).send({
       ok:true,
       message: "Pet encontrado com sucesso",
-      dados: req.pet
+      dados: pet
     })
+  } catch (error) {
+  return res.status(500).send({
+        ok:false,
+        mensage: error.toString()
   })
+}
+})
 
 //PUT
  app.put('/pets/:id',[validatePetMiddleware], (req, res) => {
