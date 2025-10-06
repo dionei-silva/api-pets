@@ -1,7 +1,7 @@
 import express from 'express'
 import * as dotenv from 'dotenv'
 import {randomUUID} from 'crypto'
-import {logMiddleware, checkPetIdMiddleware } from './middleware.js'
+import {logMiddleware, validatePetMiddleware } from './middleware.js'
 
 import {pets} from './pets.js'
 
@@ -66,6 +66,31 @@ app.get('/pets/:id',[checkPetIdMiddleware], (req, res) => {
       dados: req.pet
     })
   })
+
+//PUT
+ app.put('/pets/:id',[validatePetMiddleware], (req, res) => {
+  const {id} = req.params
+  const{nome, raca, idade, nomeTutor} = req.body
+
+  const pet = pets.find((item)=> item.id === id)   
+  if(!pet){
+    return res.status(404).send({
+      ok:false,
+      message: "Pet nao encontrado"
+    })
+  } 
+  pet.nome = nome
+  pet.raca = raca
+  pet.idade = idade
+  pet.nomeTutor = nomeTutor
+  
+  res.status(200).send({
+    ok: true,
+    message: "Pet atualizado!",
+    dados: pets
+  })
+}) 
+
 
 
 
