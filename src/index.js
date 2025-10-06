@@ -107,6 +107,24 @@ app.get('/pets/:id', (req, res) => {
   })
 }) 
 
+//DELETE
+app.delete('/pets/:id', (req, res) => {
+  const {id} = req.params
+
+  const petIndex = pets.findIndex(item=> item.id === id)
+  if(petIndex < 0){
+    res.status(404).send({
+      ok: false,
+      message: "Pet nao encontrado"
+    })
+  }
+  pets.splice(petIndex,1)
+  res.status(200).send({
+    ok: true,
+    message: "Pet excluido com sucesso!",
+    dados: pets
+  })
+})
 
 
 
