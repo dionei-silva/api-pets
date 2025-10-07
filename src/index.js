@@ -12,7 +12,7 @@ const app = express()
 
 app.use(express.json())
 app.use(logMiddleware)
-app.use(cors)
+app.use(cors())
 
 //GET
 app.get('/pets', (req, res) => {
