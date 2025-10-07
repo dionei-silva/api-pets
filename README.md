@@ -39,3 +39,42 @@ No Postman, utilize a variável de ambiente `{{base_url}}` para facilitar a troc
       "idade": 3
     }
   ]
+  POST /pets
+Adiciona um novo pet.
+
+Body:
+
+json
+{
+  "nome": "Bidu",
+  "tipo": "Cachorro",
+  "idade": 4
+}
+PUT /pets/:id
+Atualiza os dados de um pet.
+
+Body:
+
+json
+{
+  "nome": "Bidu",
+  "tipo": "Cachorro",
+  "idade": 5
+}
+DELETE /pets/:id
+Remove um pet do sistema.
+
+🔐 CORS
+A API utiliza o middleware cors() para permitir requisições de diferentes origens. Certifique-se de usar:
+
+js
+import cors from 'cors';
+app.use(cors());
+🧪 Testes com Postman
+Configure o ambiente pets com a variável:
+
+Código
+base_url = http://localhost:3001
+Use {{base_url}}/pets nas requisições.
+
+Certifique-se de que o ambiente está ativo no Postman.
