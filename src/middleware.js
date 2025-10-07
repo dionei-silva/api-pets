@@ -1,10 +1,3 @@
-import { pets } from "./pets.js"
-
-export const logMiddleware = (req, res, next) => {
-      console.log('Middleware!!!!!!!');
-      next()
-}
-
 export const validatePetMiddleware = (req, res, next) => {
       try {
             const {nome, idade, raca, nomeTutor} = req.body

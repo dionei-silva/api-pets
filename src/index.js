@@ -2,7 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import * as dotenv from 'dotenv'
 import {randomUUID} from 'crypto'
-import {logMiddleware, validatePetMiddleware } from './middleware.js'
+import { validatePetMiddleware } from './middleware.js'
 
 import {pets} from './pets.js'
 
@@ -11,7 +11,6 @@ dotenv.config()
 const app = express()
 
 app.use(express.json())
-app.use(logMiddleware)
 app.use(cors())
 
 //GET
@@ -115,7 +114,7 @@ app.delete('/pets/:id', (req, res) => {
 
   const petIndex = pets.findIndex(item=> item.id === id)
   if(petIndex < 0){
-    res.status(404).send({
+   return res.status(404).send({
       ok: false,
       message: "Pet nao encontrado"
     })
