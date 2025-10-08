@@ -14,6 +14,8 @@ https://documenter.getpostman.com/view/48376128/2sB3QJPWts
 - CORS
 - Postman (para testes)
 - VS Code
+- Middleware de validação
+- Render (Hospedagem)
 
 ---
 
@@ -36,41 +38,12 @@ Retorna todos os pets cadastrados.
  
  GET https://api-pets-3nnt.onrender.com/pets/
 
-- **Exemplo de resposta**:
-  ```json
-  {
-    "ok": true,
-    "message": "Pets listados com sucesso",
-    "data": [
-        {
-            "id": "fb6b7764-1c16-4072-a520-4d00fc16232b",
-            "nome": "Luna",
-            "raca": "Golden",
-            "idade": 3,
-            "nomeTutor": "Carlos"
-        },
-        {
-            "id": "e05d028e-174d-4177-9d04-d78e1f4e59e4",
-            "nome": "Mimi",
-            "raca": "Persa",
-            "idade": 2,
-            "nomeTutor": "Fernanda"
-        },
-        {
-            "id": "51c3d61d-b7d0-420c-9a72-5833a8413ff1",
-            "nome": "Thor",
-            "raca": "Bulldog",
-            "idade": 4,
-            "nomeTutor": "João"
-        }
-    ]
-  }
-
 ---
 
 ### 'POST /pets'
  Adiciona um novo pet ao sistema.
-📌 Campos obrigatórios (JSON)
+ 
+- 📌 Campos obrigatórios (JSON)
 
 - nome (string): Nome do pet
 
@@ -103,5 +76,57 @@ Retorna todos os pets cadastrados.
  GET https://api-pets-3nnt.onrender.com/pets/5434290a-4261-4ce3-a38c-46d23ccbab66
 
 ---
+✏️ Atualizar pet existente
+
+PUT /pets/:id
+
+Atualiza os dados de um pet existente.
+
+🔑 Parâmetros de URL
+
+id (string): ID do pet a ser atualizado
+
+- 📌 Campos obrigatórios (JSON)
+
+- nome (string): Nome do pet
+
+- raca (string): Raça do pet
+
+- idade (number): Idade do pet
+
+- nomeTutor (string): Nome do tutor
+
+📦 Exemplo de body (JSON)
+```json
+   {
+     "nome": "Rudolf",
+     "raca": "SRD",
+     "idade": 10,
+     "nomeTutor": "Felipe"
+   }
+
+
+---
+
+🗑️ Deletar pet
+
+DELETE /pets/:id
+
+Remove um pet do sistema.
+
+🔑 Parâmetros de URL
+
+id (string): ID do pet
+
+✅ Exemplo de requisição
+
+DELETE https://api-pets-3nnt.onrender.com/pets/5434290a-4261-4ce3-a38c-46d23ccbab66
+
+---
+## ✅ Validações
+
+Todas as rotas de POST e PUT exigem que todos os campos obrigatórios estejam preenchidos, caso contrário a requisição será rejeitada pelo middleware de validação.
+
+Desenvolvido por Dionei 🧠 Projeto para fins de estudo e prática com APIs REST.
 
 
